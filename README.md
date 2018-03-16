@@ -3,19 +3,77 @@
 履歴書を書く際に必要な学歴の項目（年、月、説明）を返します。
 和暦変換対応です。
 
-#### デモ
-・サンプル１  
+#### ・デモ１  
 https://codepen.io/yfp5521/full/NYrzdP/
 
-・サンプル２  
+#### ・デモ２  
 https://codepen.io/yfp5521/full/LdZBxK/
 
-## 引数
+## 使い方
+create_academic_background(birth,options)を呼び出すと、戻り値をリストで返します。（デフォルトでは中学、高校、大学の学歴を返します）
+birthは生年月日、optionsは留年や浪人などのオプションを指定します。
+
+#### 使用例
+```
+    //生年月日オブジェクトを作成
+    let birth = new Object();
+    birth.year = 1990;
+    birth.month = 1;
+    birth.day = 10;
+    
+    //学歴変換jsを呼び出し、戻り値をresult_listに格納
+    const result_list = create_academic_background(birth) 
+
+
+    //以下result_listの中身
+    [    
+        {
+            desc: "◯◯中学校　卒業",
+            japanese_year: "平成17年",
+            month: 3,
+            western_year: 2005
+        },
+        {
+            desc: "◯◯高等学校　入学",
+            japanese_year: "平成17年",
+            month: 4,
+            western_year : 2005
+        },
+        {
+            desc: "◯◯高等学校　卒業",
+            japanese_year: "平成20年",
+            month: 3,
+            western_year: 2008
+        },
+          {
+            desc: "◯◯大学　◯◯学部　◯◯学科　入学",
+            japanese_year: "平成20年",
+            month: 4,
+            western_year : 2008
+        },
+        {
+            desc: "◯◯大学　◯◯学部　◯◯学科　卒業",
+            japanese_year: "平成24年",
+            month: 3,
+            western_year: 2012
+        },
+    ]
+    
+```
+
+
+ 
+
+
+
+
+## 引数の詳細
 
 引数は生年月日とオプション（浪人、留年などの設定）の２つです。  
 
     function create_academic_background(birth, options)
- 
+
+
 ### 生年月日(birth) ※必須
 +   `bitrh.birth_year` : 
     生年月日の「年」を西暦４桁で渡します。（例：1990）
@@ -26,9 +84,11 @@ https://codepen.io/yfp5521/full/LdZBxK/
 +   `bitrh.birth_year` :
     生年月日の「日」を渡します。（例：10）
 
+
 ### オプション(options)　※任意
 
 オプションでは留年・浪人などの期間や表示の可否を設定できます。
+
 
 #### optionsオブジェクトの構成(抜粋)
 ```
@@ -49,6 +109,8 @@ https://codepen.io/yfp5521/full/LdZBxK/
 		},
     }
 ```
+
+
 #### デフォルトの設定
 デフォルトでは以下の通りに設定されているので、必要な箇所を上書きしてください。  
 デフォルトでは中高大の学歴が、戻り値に追加されるようになっています。
@@ -148,7 +210,7 @@ https://codepen.io/yfp5521/full/LdZBxK/
 		},
 	};
 ```
-##### 例１（大学浪人２年、大学留年１年を追加）
+##### オプションの追加例１（大学浪人２年、大学留年１年を追加）
 ```
     let birth = new Object();
     birth.year = 1990;
@@ -171,7 +233,7 @@ https://codepen.io/yfp5521/full/LdZBxK/
 
 ```
 
-##### 例２（修士を追加）
+##### オプションの追加例２（修士を追加）
 ```
     let birth = new Object();
     birth.year = 1990;
@@ -189,7 +251,7 @@ https://codepen.io/yfp5521/full/LdZBxK/
 
 ```
 
-#### 最終学歴の設定
+## 最終学歴の設定
 上記のようにデフォルト値を上書きする方法以外に、最終学歴(last_academic_background)を渡すことで戻り値の学歴リストを指定することもできます。
 (留年や浪人などを追加するperiodも併用できます。)
 
@@ -208,56 +270,9 @@ https://codepen.io/yfp5521/full/LdZBxK/
 +   'university'　: 「中学、高校、大学」を表示
 +   'master'　: 「中学、高校、大学、修士」を表示
 +   'doctor': 「中学、高校、大学、修士、博士」を表示
+  
+  
+## License
+MIT
 
-
-## 戻り値
-戻り値は学歴リストを返します。  
-デフォルトでは中高大の学歴を返します。
-
-##### 例
-```
-    //生年月日オブジェクトを作成
-    let birth = new Object();
-    birth.year = 1990;
-    birth.month = 1;
-    birth.day = 10;
-    
-    //学歴変換jsを呼び出し、戻り値をresult_listに格納
-    const result_list = create_academic_background(birth) 
-
-    <!-- 以下result_listの中身 -->
-    <!-- [    
-        {
-            desc: "◯◯中学校　卒業",
-            japanese_year: "平成17年",
-            month: 3,
-            western_year: 2005
-        },
-        {
-            desc: "◯◯高等学校　入学",
-            japanese_year: "平成17年",
-            month: 4,
-            western_year : 2005
-        },
-        {
-            desc: "◯◯高等学校　卒業",
-            japanese_year: "平成20年",
-            month: 3,
-            western_year: 2008
-        },
-          {
-            desc: "◯◯大学　◯◯学部　◯◯学科　入学",
-            japanese_year: "平成20年",
-            month: 4,
-            western_year : 2008
-        },
-        {
-            desc: "◯◯大学　◯◯学部　◯◯学科　卒業",
-            japanese_year: "平成24年",
-            month: 3,
-            western_year: 2012
-        },
-    ] -->
-    
-```
 
